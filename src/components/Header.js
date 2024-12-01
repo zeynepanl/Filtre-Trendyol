@@ -4,8 +4,6 @@ import {
   HeartIcon,
   ShoppingCartIcon,
   Bars3Icon,
-  StarIcon,
-  BoltIcon,
 } from "@heroicons/react/24/solid";
 
 export default function Header() {
@@ -13,17 +11,16 @@ export default function Header() {
     <header>
       {/* Reklam Bandı */}
       <div className="bg-customPurple py-2 hidden md:block">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center  md:space-y-0 md:space-x-4 px-28">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center md:space-y-0 md:space-x-4 px-28">
           {/* Sol Bölüm */}
           <span
-            className="relative text-white md:text-xl font-extrabold  ml-20"
+            className="relative text-white md:text-xl font-extrabold ml-20"
             style={{
               textShadow: `
-                  -1px -1px 2px #ff5f5f,   /* Sol üst - Pembe */
-                  1px 1px 2px #5fafff,     /* Sağ alt - Mavi */
-                  -1px 1px 2px #ab47bc,    /* Sol alt - Mor */
-                  1px -1px 2px #ff5f5f     /* Sağ üst - Pembe */
-                `,
+                  -1px -1px 2px #ff5f5f,
+                  1px 1px 2px #5fafff,
+                  -1px 1px 2px #ab47bc,
+                  1px -1px 2px #ff5f5f`,
             }}
           >
             27 KASIM - 2 ARALIK
@@ -35,14 +32,14 @@ export default function Header() {
           </div>
 
           {/* Sağ Bölüm */}
-          <span className="text-white  md:text-4xl font-bold pr-24 tracking-tight">
+          <span className="text-white md:text-4xl font-bold pr-24 tracking-tight">
             KAÇIRIRSAN ÜZÜLÜRSÜN!
           </span>
         </div>
       </div>
 
-      {/* top bar */}
-      <div className=" py-1 hidden md:block">
+      {/* Top Bar */}
+      <div className="py-1 hidden md:block">
         <div className="container mx-auto flex justify-end space-x-6 text-xs text-gray-400 pr-44">
           <a href="#" className="hover:text-black transition duration-200">
             İndirim Kuponlarım
@@ -59,14 +56,31 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Logo, Arama Çubuğu ve Kullanıcı İkonları */}
-      <div className="bg-white py-2">
+      {/* Mobil Header */}
+      <div className="bg-white md:hidden py-2 px-4 flex justify-between items-center border-b">
+        {/* Menü ve Logo */}
+        <div className="flex items-center space-x-2">
+          <div className="flex flex-col items-center">
+            <Bars3Icon className="w-8 h-7 text-black" />
+            <span className="text-xs text-gray-600 mt-[-6px]">menü</span>
+          </div>
+          <span className="text-2xl font-medium">trendyol</span>
+        </div>
+
+        {/* İkonlar */}
+        <div className="flex items-center space-x-4">
+          <MagnifyingGlassIcon className="w-7 h-7 text-black" />
+          <HeartIcon className="w-7 h-7 fill-white stroke-black" />
+          <ShoppingCartIcon className="w-7 h-7 fill-white stroke-black" />
+        </div>
+      </div>
+
+      {/* Logo, Arama Çubuğu ve Kullanıcı İkonları (Masaüstü) */}
+      <div className="bg-white py-2 hidden md:block">
         <div className="container mx-auto flex items-center justify-between px-28 pr-44">
           {/* Logo */}
           <div className="flex items-center ml-12">
-            <span className="text-black  md:text-4xl font-medium">
-              trendyol
-            </span>
+            <span className="text-black md:text-4xl font-medium">trendyol</span>
           </div>
 
           {/* Arama Çubuğu */}
@@ -82,7 +96,6 @@ export default function Header() {
           </div>
 
           {/* Kullanıcı İkonları */}
-
           <div className="flex items-center space-x-6 text-xs font-semibold text-gray-700">
             {/* Giriş Yap */}
             <a
@@ -107,7 +120,7 @@ export default function Header() {
               href="#"
               className="flex items-center space-x-1 group hover:text-orange-500 transition duration-200"
             >
-              <ShoppingCartIcon className="w-4 h-4 stroke-black  fill-white group-hover:stroke-orange-500 group-hover:fill-orange-500 transition duration-200" />
+              <ShoppingCartIcon className="w-4 h-4 stroke-black fill-white group-hover:stroke-orange-500 group-hover:fill-orange-500 transition duration-200" />
               <span>Sepetim</span>
             </a>
           </div>
@@ -115,7 +128,7 @@ export default function Header() {
       </div>
 
       {/* Tüm Kategoriler ve Menü */}
-      <div className="bg-white py-2 border-b border-gray-300">
+      <div className="bg-white py-2 border-b border-gray-300 hidden md:flex">
         <div className="container mx-auto flex items-center justify-between px-28 pr-44">
           {/* Tüm Kategoriler */}
           <div className="flex items-center space-x-2 ml-12">
