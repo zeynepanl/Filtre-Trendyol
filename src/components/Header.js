@@ -9,10 +9,10 @@ export default function Header() {
               className="relative text-white text-lg md:text-xl font-extrabold ml-20"
               style={{
                 textShadow: `
-                  1px 1px 1px #ff5f5f,   /* Pembe */
-                  -1px -1px 1px #5fafff, /* Mavi */
-                  1px -1px 1px #ab47bc,  /* Mor */
-                  -1px 1px 1px #ff5f5f   /* Pembe */
+                  -1px -1px 2px #ff5f5f,   /* Sol üst - Pembe */
+                  1px 1px 2px #5fafff,     /* Sağ alt - Mavi */
+                  -1px 1px 2px #ab47bc,    /* Sol alt - Mor */
+                  1px -1px 2px #ff5f5f     /* Sağ üst - Pembe */
                 `,
               }}
             >
