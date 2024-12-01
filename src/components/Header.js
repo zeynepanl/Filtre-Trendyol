@@ -133,7 +133,7 @@ export default function Header() {
           {/* Tüm Kategoriler */}
           <div className="flex items-center space-x-2 ml-12">
             <Bars3Icon className="w-5 h-5 text-black" />
-            <span className="text-sm font-semibold text-black">
+            <span className="text-sm font-medium text-black">
               TÜM KATEGORİLER
             </span>
           </div>
@@ -202,6 +202,20 @@ export default function Header() {
             </a>
           </div>
         </div>
+      </div>
+
+      <div className="py-2 bg-white text-sm text-gray-600 px-28 ml-12">
+        <nav className="flex space-x-2">
+          <a href="#" className="hover:text-black hover:underline">
+            Trendyol
+          </a>
+          <span className="text-orange-500">›</span>
+          <a href="#" className="hover:text-black hover:underline">
+            Ev ve Mobilya
+          </a>
+          <span className="text-orange-500">›</span>
+          <span>Mobilya</span>
+        </nav>
       </div>
     </header>
   );
