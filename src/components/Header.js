@@ -204,7 +204,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="py-2 bg-white text-sm text-gray-600 px-28 ml-12">
+      <div className="py-2 bg-white text-sm text-gray-600 px-4 md:px-28 ml-0 md:ml-12 ">
         <nav className="flex space-x-2">
           <a href="#" className="hover:text-black hover:underline">
             Trendyol
