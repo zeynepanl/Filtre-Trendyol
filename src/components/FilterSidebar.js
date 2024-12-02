@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 const AccordionItem = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +28,7 @@ const AccordionItem = ({ title, children }) => {
   );
 };
 
-export default function FilterSidebar() {
+export default function FilterSidebar({ isMobile = false, onClose }) {
   const [showMore, setShowMore] = useState(false);
 
   const categories = [
@@ -45,9 +45,61 @@ export default function FilterSidebar() {
 
   const visibleCategories = showMore ? categories : categories.slice(0, 5);
 
+  if (isMobile) {
+    // Mobil modal içeriği
+    return (
+      <div className="fixed inset-0 bg-white z-50 overflow-y-auto">
+        {/* Başlık */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-300">
+          <h2 className="text-lg font-medium text-gray-800">FİLTRELE</h2>
+          <button onClick={onClose} className="text-gray-500 text-xl">
+            ✕
+          </button>
+        </div>
+
+        {/* Seçili Filtreler */}
+        <div className="px-4 py-3 border-b border-gray-300">
+          <h3 className="text-gray-500 text-sm mb-2">Seçili Filtreler</h3>
+          <button className="px-3 py-1 text-sm bg-gray-200 rounded-full text-gray-700">
+            Mobilya
+          </button>
+        </div>
+
+        {/* Filtre seçenekleri */}
+        <div className="divide-y divide-gray-300">
+          <button className="flex justify-between items-center px-4 py-3 text-gray-700">
+            <span>Avantajlı Ürünler</span>
+            <ChevronRightIcon className="w-5 h-5 text-gray-500" />
+          </button>
+          <button className="flex justify-between items-center px-4 py-3 text-gray-700">
+            <span>Kategori</span>
+            <span className="text-orange-500">(1)</span>
+            <ChevronRightIcon className="w-5 h-5 text-gray-500" />
+          </button>
+          <button className="flex justify-between items-center px-4 py-3 text-gray-700">
+            <span>Marka</span>
+            <ChevronRightIcon className="w-5 h-5 text-gray-500" />
+          </button>
+          <button className="flex justify-between items-center px-4 py-3 text-gray-700">
+            <span>Genişlik</span>
+            <ChevronRightIcon className="w-5 h-5 text-gray-500" />
+          </button>
+        </div>
+
+        {/* Alt kısımdaki buton */}
+        <div className="fixed bottom-0 left-0 w-full bg-white px-4 py-3 border-t border-gray-300">
+          <button className="w-full bg-orange-500 text-white text-sm font-medium py-2 rounded-md">
+            Tüm Sonuçları Listele (100.000+)
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Masaüstü görünüm korunur
   return (
     <div className="hidden md:block bg-white w-64 border-r border-gray-300 h-screen px-4 py-4 ml-32 custom-scrollbar overflow-y-auto">
-      {/* İlgili Kategoriler */}
+      {/* Masaüstü içeriği */}
       <AccordionItem title="İlgili Kategoriler">
         <ul className="space-y-1 text-xs">
           {visibleCategories.map((category, index) => (
@@ -77,8 +129,7 @@ export default function FilterSidebar() {
           </button>
         )}
       </AccordionItem>
-
-      {/* Diğer Accordionlar */}
+      {/* Diğer accordionlar */}
       <AccordionItem title="Marka">
         <div>
           <input

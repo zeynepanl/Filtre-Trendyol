@@ -1,9 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { ChevronLeftIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import FilterSidebar from "./FilterSidebar"; // Filtre Modalı için
+import FilterContent from "./FilterTabs"; // Filtre İçeriği için
 
 const SearchResultHeader = () => {
+  const [showFilterModal, setShowFilterModal] = useState(false); // Modal kontrolü
+
   return (
     <div className="p-3 bg-white border-b border-gray-300">
       {/* Mobil Görünüm */}
@@ -18,16 +22,43 @@ const SearchResultHeader = () => {
         </div>
       </div>
 
+      {/* Mobil Butonlar */}
+      <div className="flex items-center justify-between md:hidden mt-2">
+        <button className="w-1/2 px-4 py-2 border border-gray-300 rounded-l-lg">
+          <span className="text-gray-800 text-sm font-medium">Önerilen</span>
+        </button>
+        <button
+          onClick={() => setShowFilterModal(true)} // Modal açma işlevi
+          className="w-1/2 px-4 py-2 border border-gray-300 rounded-r-lg"
+        >
+          <span className="text-gray-800 text-sm font-medium">Filtrele</span>
+        </button>
+      </div>
+
+      {/* Mobil Filtre İçeriği */}
+      <FilterContent />
+
+      {/* Filtre Modalı */}
+      {showFilterModal && (
+        <FilterSidebar
+          isMobile={true}
+          onClose={() => setShowFilterModal(false)} // Modal kapatma işlevi
+        />
+      )}
+
       {/* Masaüstü Görünüm */}
       <div className="hidden md:block">
         {/* Üst Bilgi */}
         <div className="flex justify-between items-center">
           <div className="text-gray-600 text-lg font-medium">
-            <span className="text-black font-medium">"Mobilya"</span> araması için{" "}
-            <span className="text-black font-medium">100.000+</span> sonuç listeleniyor
+            <span className="text-black font-medium">"Mobilya"</span> araması
+            için <span className="text-black font-medium">100.000+</span> sonuç
+            listeleniyor
           </div>
           <button className="flex items-center justify-between space-x-2 px-6 py-3 border border-gray-300 rounded-lg hover:border-orange-500 transition mr-36">
-            <span className="text-gray-800 text-sm font-medium pr-32">Önerilen</span>
+            <span className="text-gray-800 text-sm font-medium pr-32">
+              Önerilen
+            </span>
             <ChevronUpDownIcon className="w-5 h-5 text-orange-500" />
           </button>
         </div>
