@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronLeftIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { ChevronLeftIcon, ChevronUpDownIcon, FunnelIcon } from "@heroicons/react/20/solid";
 import FilterSidebar from "./FilterSidebar"; // Filtre Modalı için
 import FilterContent from "./FilterTabs"; // Filtre İçeriği için
 

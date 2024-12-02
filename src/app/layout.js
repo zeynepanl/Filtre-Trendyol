@@ -1,6 +1,6 @@
-import "./globals.css";
 import Header from "../components/Header";
 import FilterSidebar from "../components/FilterSidebar";
+import "./globals.css";
 
 export default function RootLayout({ children }) {
   return (
