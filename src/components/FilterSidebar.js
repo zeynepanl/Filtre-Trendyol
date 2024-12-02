@@ -46,7 +46,7 @@ export default function FilterSidebar() {
   const visibleCategories = showMore ? categories : categories.slice(0, 5);
 
   return (
-    <div className="bg-white w-64 border-r border-gray-300 h-screen px-4 py-4 ml-32 custom-scrollbar overflow-y-auto">
+    <div className="hidden md:block bg-white w-64 border-r border-gray-300 h-screen px-4 py-4 ml-32 custom-scrollbar overflow-y-auto">
       {/* İlgili Kategoriler */}
       <AccordionItem title="İlgili Kategoriler">
         <ul className="space-y-1 text-xs">
