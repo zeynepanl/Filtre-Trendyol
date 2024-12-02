@@ -96,7 +96,7 @@ export default function Header() {
           </div>
 
           {/* Kullanıcı İkonları */}
-          <div className="flex items-center space-x-6 text-xs font-semibold text-gray-700">
+          <div className="flex items-center space-x-6 text-sm font-semibold text-gray-700">
             {/* Giriş Yap */}
             <a
               href="#"
@@ -139,7 +139,7 @@ export default function Header() {
           </div>
 
           {/* Menü Linkleri */}
-          <div className="flex items-center justify-end space-x-6 text-xs font-semibold text-gray-700 flex-grow">
+          <div className="flex items-center justify-end space-x-6 text-sm font-medium text-gray-700 flex-grow">
             <a
               href="#"
               className="hover:text-orange-500 transition duration-200"
