@@ -45,20 +45,24 @@ body {
     border-radius: 10px; /* Kenarları yuvarlak yapmak için */
     border: 2px solid transparent; /* Kenar düzgünlüğü */
     background-clip: padding-box; /* Yuvarlak kenarları doğru şekilde göstermek için */
+    overflow-x: hidden;
   }
   
   .custom-scrollbar::-webkit-scrollbar-track {
     background-color: transparent; /* Arka plan görünümü */
   }
-  
-  /* Tooltip sadece üzerine gelindiğinde görünsün */
-.tooltip-content {
-  display: none; /* Başlangıçta gizli */
-}
 
-/* Tooltip metni üzerine gelindiğinde görünür hale gelir */
-.tooltip-content:hover {
-  display: block;
+/* Sabit filtre alanı */
+.filter-sidebar {
+  position: sticky ;  /* Sayfa kaydırıldığında sabit kalması için */
+  top: 0;  /* Sayfanın üst kısmında olacak şekilde sabitlenir */
+  left: 12px;  /* Sayfanın sol kısmında sabitlenir */
+  width: 450px;  /* İstenilen genişlik */
+  height: 100%;  /* Sayfanın tamamını kaplamasını sağlar */
+  overflow-y: auto;  /* Yüksekliği aşan içerik için scroll ekler */
+  overflow-x: hidden;
+  background-color: white;  /* Arka plan rengi */
+  z-index: 9;  /* Diğer öğelerin önünde olmasını sağlar */
 }
 
 

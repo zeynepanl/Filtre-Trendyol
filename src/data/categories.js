@@ -1,6 +1,7 @@
 const categories = [
   {
     title: "Kadın",
+    icon: "👩", // Kadın kategorisi için ikon
     subcategories: [
       {
         title: "Giyim",
@@ -20,7 +21,6 @@ const categories = [
           "Trençkot",
           "Yağmurluk & Rüzgarlık",
           "Sweatshirt",
-         
         ],
       },
       {
@@ -56,7 +56,8 @@ const categories = [
           "Anne Bebek Çantası",
           "Evrak Çantası",
           "Tote Çanta",
-         
+
+             
         ],
       },
       {
@@ -77,6 +78,7 @@ const categories = [
   },
   {
     title: "Erkek",
+    icon: "👨", // Erkek kategorisi için ikon
     subcategories: [
       {
         title: "Erkek Giyim",
@@ -101,6 +103,7 @@ const categories = [
   },
   {
     title: "Anne & Çocuk",
+    icon: "👶", // Anne & Çocuk kategorisi için ikon
     subcategories: [
       {
         title: "Bebek Giyim",
@@ -114,6 +117,7 @@ const categories = [
   },
   {
     title: "Ev & Mobilya",
+    icon: "🏠", // Ev & Mobilya kategorisi için ikon
     subcategories: [
       {
         title: "Mobilya",
@@ -127,6 +131,7 @@ const categories = [
   },
   {
     title: "Süpermarket",
+    icon: "🛒", // Süpermarket kategorisi için ikon
     subcategories: [
       {
         title: "Atıştırmalık",
@@ -140,10 +145,11 @@ const categories = [
   },
   {
     title: "Kozmetik",
+    icon: "💄", // Kozmetik kategorisi için ikon
     subcategories: [
       {
         title: "Makyaj",
-        items: [
+       items: [
           "Fondöten",
           "Maskara",
           "Ruj",
@@ -160,6 +166,7 @@ const categories = [
   },
   {
     title: "Ayakkabı & Çanta",
+    icon: "👟", // Ayakkabı & Çanta kategorisi için ikon
     subcategories: [
       {
         title: "Ayakkabı",
@@ -173,6 +180,7 @@ const categories = [
   },
   {
     title: "Elektronik",
+    icon: "📱", // Elektronik kategorisi için ikon
     subcategories: [
       {
         title: "Telefon",
@@ -186,6 +194,7 @@ const categories = [
   },
   {
     title: "Spor & Outdoor",
+    icon: "🏋️", // Spor & Outdoor kategorisi için ikon
     subcategories: [
       {
         title: "Giyim",

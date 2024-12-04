@@ -26,12 +26,12 @@ const SearchResultHeader = () => {
     <div className="p-3 bg-white border-b border-gray-300">
       {/* Mobil Görünüm */}
       <div className="flex items-center justify-between md:hidden">
-        <button className="text-black text-lg mr-2">
+        <button className="text-black text-lg mr-2 ">
           {/* Geri Butonu */}
           <ChevronLeftIcon className="w-5 h-5" />
         </button>
         <div className="flex-grow text-center">
-          <h1 className="text-black text-lg font-medium">Mobilya</h1>
+          <h1 className="text-black text-lg font-medium ">Mobilya</h1>
           <p className="text-gray-400 text-sm">100.000+ Ürün Listeleniyor</p>
         </div>
       </div>
@@ -64,7 +64,7 @@ const SearchResultHeader = () => {
       <div className="hidden md:block">
         {/* Üst Bilgi */}
         <div className="flex justify-between items-center">
-          <div className="text-gray-600 text-lg font-medium">
+          <div className="text-gray-600 text-lg font-medium ml-4">
             <span className="text-black font-medium">"Mobilya"</span> araması
             için <span className="text-black font-medium">100.000+</span> sonuç
             listeleniyor
