@@ -357,7 +357,7 @@ export default function FilterSidebar({ isMobile = false, onClose }) {
         <AccordionItem
           title={
             <div className="flex items-center space-x-2 relative">
-              <span className="py-2 text-sm whitespace-nowrap">
+              <span className="py-2 text-sm font-bold whitespace-nowrap">
                 Satıcı Tipi
               </span>
               {/* "Satıcı Tipi Nedir?" metninin etrafında ayrı bir grup oluşturuyoruz */}
@@ -402,7 +402,7 @@ export default function FilterSidebar({ isMobile = false, onClose }) {
             </label>
           </div>
         </AccordionItem>
-        <div className="border-b border-gray-300 rounded-md">
+        <div className="border-b border-gray-300 rounded-md font-bold">
           {/* Fotoğraflı Yorumlar */}
           <div className="py-3 px-4 hover:bg-gray-100 cursor-pointer border-b border-gray-200">
             <label className="flex items-center space-x-2">
