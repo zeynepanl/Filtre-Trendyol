@@ -1,12 +1,26 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const FilterTabs = () => {
   const [openTab, setOpenTab] = useState(null); // Açık olan sekme
   const [modalStyle, setModalStyle] = useState({}); // Modalın dinamik stili
   const tabsContainerRef = useRef(null); // Tabların kapsayıcısı için referans
+  const modalRef = useRef(null); // Modal alanını takip eden referans
+
+  // Dış tıklamaları algıla
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setOpenTab(null); // Menü dışına tıklanırsa kapat
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleTabClick = (tab, index) => {
     if (openTab === tab) {
@@ -50,7 +64,7 @@ const FilterTabs = () => {
               }`}
             >
               {tab}
-              <ChevronDownIcon className="w-4 h-4 text-gray-500" />
+              <ChevronDownIcon className="w-4 h-4 text-orange-500" />
             </button>
           </div>
         ))}
@@ -59,8 +73,9 @@ const FilterTabs = () => {
       {/* Modal */}
       {openTab && (
         <div
+          ref={modalRef} // Modal alanını takip eden referans
           style={modalStyle} // Dinamik pozisyon ve genişlik
-          className="bg-white border-t border-gray-300 shadow-lg"
+          className="bg-white  shadow-lg"
         >
           {openTab === "Kategori" && (
             <div className="p-4">

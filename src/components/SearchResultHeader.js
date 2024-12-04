@@ -28,7 +28,7 @@ const SearchResultHeader = () => {
       <div className="flex items-center justify-between md:hidden">
         <button className="text-black text-lg mr-2 ">
           {/* Geri Butonu */}
-          <ChevronLeftIcon className="w-5 h-5" />
+          <ChevronLeftIcon className="w-10 h-10" />
         </button>
         <div className="flex-grow text-center">
           <h1 className="text-black text-lg font-medium ">Mobilya</h1>
