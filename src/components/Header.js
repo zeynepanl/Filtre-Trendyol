@@ -8,9 +8,11 @@ import {
   ShoppingCartIcon,
   Bars3Icon,
 } from "@heroicons/react/24/solid";
+import categories from "../data/categories";
 
 export default function Header() {
   const [showSearchBox, setShowSearchBox] = useState(false); // Arama kutusu durumu
+  const [hoveredCategory, setHoveredCategory] = useState(0);
 
   return (
     <header>
@@ -229,16 +231,93 @@ export default function Header() {
           </div>
         </div>
       </div>
-
       {/* Tüm Kategoriler ve Menü */}
-      <div className="bg-white py-2 border-b border-gray-300 hidden md:flex">
+      <div className="bg-white py-2 border-b border-gray-300 hidden md:flex relative">
         <div className="container mx-auto flex items-center justify-between px-28 pr-44">
-          {/* Tüm Kategoriler */}
-          <div className="flex items-center space-x-2 ml-12">
-            <Bars3Icon className="w-5 h-5 text-black" />
-            <span className="text-sm font-medium text-black">
-              TÜM KATEGORİLER
-            </span>
+          {/* Parent Div for Hover State */}
+          <div
+            className="relative group"
+            onMouseEnter={() => setHoveredCategory("all")}
+            onMouseLeave={() => {
+              // Menü alanının dışına çıkınca kapatılacak
+              setTimeout(() => {
+                if (!document.querySelector(".category-dropdown:hover")) {
+                  setHoveredCategory(null);
+                }
+              }, 200);
+            }}
+          >
+            {/* TÜM KATEGORİLER Button */}
+            <div className="flex items-center space-x-2 ml-12 cursor-pointer">
+              <Bars3Icon className="w-5 h-5 text-black" />
+              <span className="text-sm font-medium text-black">
+                TÜM KATEGORİLER
+              </span>
+            </div>
+
+            {/* Dropdown Menu */}
+            {(hoveredCategory === "all" || hoveredCategory !== null) && (
+              <div
+                className="absolute top-full left-0 w-[900px] bg-white shadow-lg border border-gray-200 z-50 mt-2 grid grid-cols-7 gap-4 category-dropdown"
+                onMouseEnter={() => setHoveredCategory("all")}
+                onMouseLeave={() => {
+                  // Menü alanının dışına çıkınca kapatılacak
+                  setTimeout(() => {
+                    if (!document.querySelector(".category-dropdown:hover")) {
+                      setHoveredCategory(null);
+                    }
+                  }, 200);
+                }}
+              >
+                {/* Left Menu - Ana Kategoriler */}
+                <div className="bg-gray-100 border-r pr-4 w-48">
+                  {categories.map((category, index) => (
+                    <div
+                      key={index}
+                      className={`w-48 p-4 cursor-pointer transition-colors duration-200 ${
+                        hoveredCategory === index ||
+                        (hoveredCategory === "all" && index === 0)
+                          ? "bg-white text-orange-500 font-bold"
+                          : "hover:bg-gray-100 hover:text-orange-500"
+                      }`}
+                      onMouseEnter={() => setHoveredCategory(index)}
+                    >
+                      <span className="font-medium">{category.title}</span>
+                    </div>
+                  ))}
+                </div>
+                {/* Right Menu - Alt Kategoriler */}
+                {categories.map(
+                  (category, index) =>
+                    (hoveredCategory === index ||
+                      hoveredCategory === "all") && (
+                      <div
+                        key={index}
+                        className="col-span-6 grid grid-cols-4 gap-4 ml-20" // Sağ hizalama için margin-left eklendi
+                      >
+                        {category.subcategories.map((subcategory, subIndex) => (
+                          <div key={subIndex} className="p-2">
+                            <h3 className="font-bold mb-2 text-orange-500 cursor-pointer whitespace-nowrap">
+                              {subcategory.title}{" "}
+                              {/* Başlık üzerine gelince turuncu renk için hover */}
+                            </h3>
+                            <ul className="text-sm text-gray-600 space-y-1">
+                              {subcategory.items.map((item, itemIndex) => (
+                                <li
+                                  key={itemIndex}
+                                  className="hover:text-orange-500 cursor-pointer"
+                                >
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    )
+                )}
+              </div>
+            )}
           </div>
 
           {/* Menü Linkleri */}

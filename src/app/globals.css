@@ -7,32 +7,60 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #ffffff;
-    --foreground: #000000;
-  }
-}
-
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
-.scrollbar-custom {
-  scrollbar-width: thin; /* Firefox için ince scrollbar */
+
+/* Hover durumunda kategori stili */
+.category-item:hover {
+  background-color: #f97316; /* Turuncu */
+  color: white; /* Beyaz yazı */
+  font-weight: bold;
 }
 
-.scrollbar-custom::-webkit-scrollbar {
-  width: 8px; /* Scrollbar genişliği */
+/* Dropdown menü hover ve görünürlük */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 50;
+  display: none; /* Varsayılan olarak gizli */
 }
 
-.scrollbar-custom::-webkit-scrollbar-thumb {
-  background-color: #888; /* Scrollbar rengi */
-  border-radius: 10px; /* Yuvarlak kenarlar */
+.category-item:hover + .dropdown-menu,
+.dropdown-menu:hover {
+  display: block; /* Hover sırasında detay kutusunu göster */
+}
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 10px; /* Scrollbar genişliği */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #888; /* Scrollbar rengi */
+    border-radius: 10px; /* Kenarları yuvarlak yapmak için */
+    border: 2px solid transparent; /* Kenar düzgünlüğü */
+    background-clip: padding-box; /* Yuvarlak kenarları doğru şekilde göstermek için */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent; /* Arka plan görünümü */
+  }
+  
+  /* Tooltip sadece üzerine gelindiğinde görünsün */
+.tooltip-content {
+  display: none; /* Başlangıçta gizli */
 }
 
-.scrollbar-custom::-webkit-scrollbar-track {
-  background-color: transparent; /* Arka plan rengi */
+/* Tooltip metni üzerine gelindiğinde görünür hale gelir */
+.tooltip-content:hover {
+  display: block;
 }
 
+
+  
+}
