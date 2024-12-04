@@ -5,14 +5,16 @@ import {
   ChevronLeftIcon,
   ChevronUpDownIcon,
   FunnelIcon,
+  XMarkIcon,
 } from "@heroicons/react/20/solid";
 import FilterSidebar from "./FilterSidebar"; // Filtre Modalı için
 import FilterContent from "./FilterTabs"; // Filtre İçeriği için
 
 const SearchResultHeader = () => {
-  const [showFilterModal, setShowFilterModal] = useState(false); // Modal kontrolü
+  const [showFilterModal, setShowFilterModal] = useState(false); // Filtre Modal kontrolü
+  const [showOptionsModal, setShowOptionsModal] = useState(false); // Önerilen Modal kontrolü
+  const [selectedOption, setSelectedOption] = useState("Önerilen"); // Seçilen önerilen seçeneği
 
-  const [showOptions, setShowOptions] = useState(false); // Önerilen açılır kutusu kontrolü
   const options = [
     "En düşük fiyat",
     "En yüksek fiyat",
@@ -21,6 +23,11 @@ const SearchResultHeader = () => {
     "En yeniler",
     "En çok değerlendirilen",
   ];
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option); // Seçilen seçeneği kaydet
+    setShowOptionsModal(false); // Modalı kapat
+  };
 
   return (
     <div className="p-3 bg-white border-b border-gray-300">
@@ -38,16 +45,72 @@ const SearchResultHeader = () => {
 
       {/* Mobil Butonlar */}
       <div className="flex items-center justify-between md:hidden mt-2">
-        <button className="w-1/2 px-4 py-2 border border-gray-300 rounded-l-lg">
-          <span className="text-gray-800 text-sm font-medium">Önerilen</span>
+        <button
+          onClick={() => setShowOptionsModal(true)} // Önerilen modalını aç
+          className="w-1/2 px-4 py-2 border border-gray-300 rounded-l-lg"
+        >
+          <span className="text-gray-800 text-sm font-medium">
+            {selectedOption}
+          </span>
         </button>
         <button
-          onClick={() => setShowFilterModal(true)} // Modal açma işlevi
+          onClick={() => setShowFilterModal(true)} // Filtre modalını aç
           className="w-1/2 px-4 py-2 border border-gray-300 rounded-r-lg"
         >
           <span className="text-gray-800 text-sm font-medium">Filtrele</span>
         </button>
       </div>
+
+      {/* Mobil Önerilen Modalı */}
+      {showOptionsModal && (
+        <>
+          {/* Arka Plan Gölgesi */}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+            onClick={() => setShowOptionsModal(false)} // Modalı kapatmak için arka plana tıklanır
+          ></div>
+
+          {/* Modal İçeriği */}
+          <div
+            className={`fixed inset-x-0 bottom-0 z-50 bg-white shadow-lg transform transition-transform duration-300 md:hidden ${
+              showOptionsModal ? "translate-y-0" : "translate-y-full"
+            }`}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-300">
+              <h2 className="text-lg font-bold">Sıralama</h2>
+              <button
+                onClick={() => setShowOptionsModal(false)} // Modalı kapat
+                className="text-gray-500 text-2xl focus:outline-none"
+              >
+                <XMarkIcon className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Modal İçeriği */}
+            <div className="p-4">
+              <ul className="text-sm text-gray-700 space-y-4">
+                {options.map((option, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleOptionClick(option)} // Seçenek tıklandığında
+                    className={`flex justify-between items-center cursor-pointer px-4 py-2 rounded-lg hover:bg-gray-100 ${
+                      selectedOption === option
+                        ? "text-orange-500 font-medium"
+                        : "text-gray-800"
+                    }`}
+                  >
+                    <span>{option}</span>
+                    {selectedOption === option && (
+                      <ChevronUpDownIcon className="w-5 h-5 text-orange-500" />
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Mobil Filtre İçeriği */}
       <FilterContent />
@@ -56,7 +119,7 @@ const SearchResultHeader = () => {
       {showFilterModal && (
         <FilterSidebar
           isMobile={true}
-          onClose={() => setShowFilterModal(false)} // Modal kapatma işlevi
+          onClose={() => setShowFilterModal(false)} // Filtre modalını kapat
         />
       )}
 
@@ -72,25 +135,25 @@ const SearchResultHeader = () => {
           {/* Önerilen Butonu ve Dropdown */}
           <div className="relative">
             <button
-              onClick={() => setShowOptions((prev) => !prev)} // Dropdown açılıp kapanma kontrolü
+              onClick={() => setShowOptionsModal((prev) => !prev)} // Dropdown açılıp kapanma kontrolü
               className="flex items-center justify-between space-x-2 px-6 py-3 border border-gray-300 rounded-lg hover:border-orange-500 transition mr-36"
             >
               <span className="text-gray-800 text-sm font-medium pr-32">
-                Önerilen
+                {selectedOption}
               </span>
               <ChevronUpDownIcon className="w-5 h-5 text-orange-500" />
             </button>
 
             {/* Dropdown Menü */}
-            {showOptions && (
+            {showOptionsModal && (
               <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
                 <ul className="py-2 text-sm text-gray-700">
                   {options.map((option, index) => (
                     <li
                       key={index}
                       onClick={() => {
-                        console.log(option); // Seçilen seçenek için işlem yapılır
-                        setShowOptions(false); // Dropdown kapatılır
+                        setSelectedOption(option); // Masaüstü için seçim
+                        setShowOptionsModal(false); // Dropdown kapatılır
                       }}
                       className="px-4 py-2 hover:bg-gray-100 hover:text-orange-500 hover:text-base cursor-pointer transition duration-200"
                     >

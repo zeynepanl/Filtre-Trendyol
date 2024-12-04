@@ -462,7 +462,6 @@ export default function Header() {
           <span>Mobilya</span>
         </nav>
       </div>
-      
     </header>
   );
 }

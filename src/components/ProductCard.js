@@ -75,7 +75,9 @@ export default function ProductCard({ product }) {
       {/* Ürün Puanı ve Fiyat */}
       <div className="mt-4 flex items-center justify-between">
         <div className="flex items-center">
-          <span className="text-yellow-500 text-xs">⭐ {product.rating.rate}</span>
+          <span className="text-yellow-500 text-xs">
+            ⭐ {product.rating.rate}
+          </span>
           <span className="text-gray-500 text-xs ml-1">
             ({product.rating.count})
           </span>
