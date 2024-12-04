@@ -10,7 +10,7 @@ export default function ProductCard({ product }) {
   };
 //module.css styless
   return (
-    <div className="border rounded-lg shadow-md p-4 bg-white">
+    <div className="border rounded-lg shadow-md p-4 bg-white ">
       {/* Üst Kısım */}
       <div className="flex justify-between items-center mb-2">
         <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
@@ -35,7 +35,7 @@ export default function ProductCard({ product }) {
       </div>
 
       {/* Görsel Alanı */}
-      <div className="bg-gray-200 w-full h-36 flex items-center justify-center">
+      <div className="bg-white w-full h-36 flex items-center justify-center">
         <img
           src={product.image}
           alt={product.title}

@@ -1,93 +1,119 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import FilterModal from "./FilterModal"; // Modal bileşeni
 
 const FilterTabs = () => {
   const [openTab, setOpenTab] = useState(null); // Açık olan sekme
-  const [showModal, setShowModal] = useState(false); // Modal kontrolü
+  const [modalStyle, setModalStyle] = useState({}); // Modalın dinamik stili
+  const tabsContainerRef = useRef(null); // Tabların kapsayıcısı için referans
 
-  const handleTabClick = (tab) => {
+  const handleTabClick = (tab, index) => {
     if (openTab === tab) {
-      setOpenTab(null);
-      setShowModal(false); // Modalı kapat
+      setOpenTab(null); // Sekmeyi kapat
     } else {
-      setOpenTab(tab);
-      setShowModal(true); // Modalı aç
+      setOpenTab(tab); // Sekmeyi aç
+
+      // Tıklanan sekmenin pozisyonunu al
+      if (tabsContainerRef.current) {
+        const tabs = tabsContainerRef.current.children;
+        const selectedTab = tabs[index];
+        const rect = selectedTab.getBoundingClientRect();
+
+        // Modalın stilini dinamik olarak ayarla
+        setModalStyle({
+          position: "absolute", // Kapsayıcıya göre pozisyonlandırma
+          top: rect.bottom - rect.top + 40, // Tabın hemen altından başla
+          left: 0, // Sol kenara hizala
+          width: "100%", // Kapsayıcı genişliğini kapla
+          zIndex: 50, // Üstte görünmesini sağla
+        });
+      }
     }
   };
 
   return (
-    <div className="md:hidden flex space-x-2 overflow-x-auto bg-white p-3">
-      {["Kategori", "Marka", "Genişlik", "Derinlik"].map((tab) => (
-        <div key={tab} className="relative">
-          <button
-            onClick={() => handleTabClick(tab)}
-            className={`flex items-center px-4 py-2 border rounded-full text-sm font-medium ${
-              openTab === tab
-                ? "bg-orange-100 border-orange-500"
-                : "bg-white border-gray-300"
-            }`}
-          >
-            {tab}
-            <ChevronDownIcon className="w-4 h-4 text-gray-500" />
-          </button>
-        </div>
-      ))}
+    <div className="relative">
+      {/* Tablar */}
+      <div
+        ref={tabsContainerRef} // Tabların kapsayıcısı için referans
+        className="md:hidden flex space-x-2 overflow-x-auto bg-white p-3"
+      >
+        {["Kategori", "Marka", "Genişlik", "Derinlik"].map((tab, index) => (
+          <div key={tab} className="relative">
+            <button
+              onClick={() => handleTabClick(tab, index)}
+              className={`flex items-center px-4 py-2 border rounded-full text-sm font-medium ${
+                openTab === tab
+                  ? "bg-orange-100 border-orange-500"
+                  : "bg-white border-gray-300"
+              }`}
+            >
+              {tab}
+              <ChevronDownIcon className="w-4 h-4 text-gray-500" />
+            </button>
+          </div>
+        ))}
+      </div>
 
       {/* Modal */}
-      {showModal && openTab && (
-        <FilterModal
-          title={openTab}
-          onClose={() => {
-            setOpenTab(null);
-            setShowModal(false);
-          }}
+      {openTab && (
+        <div
+          style={modalStyle} // Dinamik pozisyon ve genişlik
+          className="bg-white border-t border-gray-300 shadow-lg"
         >
           {openTab === "Kategori" && (
-            <div>
+            <div className="p-4">
               <input
                 type="text"
                 placeholder="Kategori Ara"
-                className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg"
+                className="w-full mb-4 px-4 py-2 border rounded-lg"
               />
               <div className="grid grid-cols-2 gap-4">
-                <label className="flex items-center space-x-2">
-                  <input type="checkbox" className="w-4 h-4" />
-                  <span>Mobilya</span>
+                <label>
+                  <input type="checkbox" className="mr-2" />
+                  Mobilya
                 </label>
-                <label className="flex items-center space-x-2">
-                  <input type="checkbox" className="w-4 h-4" />
-                  <span>Mutfak & Banyo Mobilyası</span>
+                <label>
+                  <input type="checkbox" className="mr-2" />
+                  Mutfak & Banyo Mobilyası
                 </label>
-                <label className="flex items-center space-x-2">
-                  <input type="checkbox" className="w-4 h-4" />
-                  <span>Antre & Hol</span>
+                <label>
+                  <input type="checkbox" className="mr-2" />
+                  Antre & Hol
                 </label>
-                <label className="flex items-center space-x-2">
-                  <input type="checkbox" className="w-4 h-4" />
-                  <span>Salon & Oturma Odası</span>
+                <label>
+                  <input type="checkbox" className="mr-2" />
+                  Salon & Oturma Odası
                 </label>
+              </div>
+              <div className="flex justify-between mt-4">
+                <button className="text-gray-500">Temizle</button>
+                <button className="bg-orange-500 text-white px-4 py-2 rounded-md">
+                  Uygula
+                </button>
               </div>
             </div>
           )}
-          {openTab === "Marka" && <p>Marka içerikleri buraya gelecek.</p>}
-          {openTab === "Genişlik" && <p>Genişlik içerikleri buraya gelecek.</p>}
-          {openTab === "Derinlik" && <p>Derinlik içerikleri buraya gelecek.</p>}
-        </FilterModal>
+          {openTab === "Marka" && (
+            <div className="p-4">
+              <p>Marka içerikleri buraya gelecek.</p>
+            </div>
+          )}
+          {openTab === "Genişlik" && (
+            <div className="p-4">
+              <p>Genişlik içerikleri buraya gelecek.</p>
+            </div>
+          )}
+          {openTab === "Derinlik" && (
+            <div className="p-4">
+              <p>Derinlik içerikleri buraya gelecek.</p>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
 };
 
 export default FilterTabs;
-
-
-
-
-
-
-
-
-

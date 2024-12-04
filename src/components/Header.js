@@ -7,44 +7,24 @@ import {
   HeartIcon,
   ShoppingCartIcon,
   Bars3Icon,
+  XMarkIcon,
+  ArrowLeftIcon,
 } from "@heroicons/react/24/solid";
 import categories from "../data/categories";
 
 export default function Header() {
   const [showSearchBox, setShowSearchBox] = useState(false); // Arama kutusu durumu
-  const [hoveredCategory, setHoveredCategory] = useState(0);
+  const [hoveredCategory, setHoveredCategory] = useState(null);
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobil menü durumu
+
+  // Menü kontrol fonksiyonları
+  const openMenu = () => setIsMenuOpen(true);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <header>
-      {/* Reklam Bandı */}
-      <div className="bg-customPurple py-2 hidden md:block">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center md:space-y-0 md:space-x-4 px-28">
-          {/* Sol Bölüm */}
-          <span
-            className="relative text-white md:text-xl font-extrabold ml-20"
-            style={{
-              textShadow: `
-                  -1px -1px 2px #ff5f5f,
-                  1px 1px 2px #5fafff,
-                  -1px 1px 2px #ab47bc,
-                  1px -1px 2px #ff5f5f`,
-            }}
-          >
-            27 KASIM - 2 ARALIK
-          </span>
-
-          {/* Merkezi EFSANE GÜNLER Bölümü */}
-          <div className="bg-gradient-to-r from-pink-500 via-blue-500 to-purple-500 text-white font-bold md:text-2xl py-2 px-6 rounded-full shadow-lg">
-            EFSANE GÜNLER
-          </div>
-
-          {/* Sağ Bölüm */}
-          <span className="text-white md:text-4xl font-bold pr-24 tracking-tight">
-            KAÇIRIRSAN ÜZÜLÜRSÜN!
-          </span>
-        </div>
-      </div>
-
       {/* Top Bar */}
       <div className="py-1 hidden md:block">
         <div className="container mx-auto flex justify-end space-x-6 text-xs text-gray-400 pr-44">
@@ -67,10 +47,11 @@ export default function Header() {
       <div className="bg-white md:hidden py-2 px-4 flex justify-between items-center border-b">
         {/* Menü ve Logo */}
         <div className="flex items-center space-x-2">
-          <div className="flex flex-col items-center">
-            <Bars3Icon className="w-8 h-7 text-black" />
+          <div className="flex flex-col items-center" onClick={openMenu}>
+            <Bars3Icon className="w-8 h-7 text-black cursor-pointer" />
             <span className="text-xs text-gray-600 mt-[-6px]">menü</span>
           </div>
+
           <span className="text-2xl font-medium">trendyol</span>
         </div>
 
@@ -80,6 +61,84 @@ export default function Header() {
           <HeartIcon className="w-7 h-7 fill-white stroke-black" />
           <ShoppingCartIcon className="w-7 h-7 fill-white stroke-black" />
         </div>
+
+        {/* Mobil Menü */}
+        {isMenuOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-50"
+            onClick={closeMenu}
+          >
+            <div
+              className="bg-white w-3/4 max-w-xs h-full shadow-lg z-50 relative"
+              onClick={(e) => e.stopPropagation()} // Menü dışında tıklamaları engeller
+            >
+              {/* Menü Üst Bölüm */}
+              <div className="p-4 flex justify-between items-center border-b">
+                {/* Geri Butonu ve Başlık */}
+                <div className="flex items-center space-x-2">
+                  <button
+                    className="flex items-center space-x-1 text-gray-500"
+                    onClick={() => setActiveCategory(null)} // Geri butonu
+                  >
+                    <ArrowLeftIcon className="w-5 h-5 text-black" />{" "}
+                    {/* Ok ikonu */}
+                  </button>
+                  <span className="text-2xl font-medium text-gray-800">
+                    trendyol
+                  </span>
+                </div>
+
+                {/* Kapatma Butonu */}
+                <button onClick={closeMenu}>
+                  <XMarkIcon className="w-6 h-6 text-black" />
+                </button>
+              </div>
+
+              {/* Kategoriler */}
+              <div className="p-4">
+                {activeCategory === null &&
+                  categories.map((category, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between py-3 border-b cursor-pointer hover:bg-gray-100"
+                      onClick={() => setActiveCategory(category)} // Alt kategoriler için tıklama
+                    >
+                      <div className="flex items-center space-x-4">
+                        <span className="text-orange-500 text-lg">
+                          {category.icon}
+                        </span>
+                        <span className="text-gray-700 text-sm font-medium">
+                          {category.title}
+                        </span>
+                      </div>
+                      <span className="text-gray-400">{">"}</span>
+                    </div>
+                  ))}
+
+                {/* Alt Kategoriler */}
+                {activeCategory !== null && (
+                  <div>
+                    {/* Alt Kategori Başlıkları */}
+                    {activeCategory.subcategories.map((subcategory, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between py-3 border-b cursor-pointer hover:bg-gray-100"
+                        onClick={() =>
+                          console.log(`Clicked: ${subcategory.title}`)
+                        } // İleride bir alt kategoriye tıklama durumunda aksiyon eklenebilir
+                      >
+                        <span className="text-gray-700 text-sm font-medium">
+                          {subcategory.title}
+                        </span>
+                        <span className="text-gray-400">{">"}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Logo, Arama Çubuğu ve Kullanıcı İkonları (Masaüstü) */}
@@ -183,7 +242,7 @@ export default function Header() {
           </div>
 
           {/* Kullanıcı İkonları */}
-          <div className="flex items-center space-x-6 text-sm font-semibold text-gray-700">
+          <div className="flex items-center space-x-6 text-sm font-medium text-gray-700">
             {/* Giriş Yap */}
             <div className="relative group">
               <a
@@ -256,10 +315,10 @@ export default function Header() {
             </div>
 
             {/* Dropdown Menu */}
-            {(hoveredCategory === "all" || hoveredCategory !== null) && (
+            {(hoveredCategory === "Kadın" || hoveredCategory !== null) && (
               <div
                 className="absolute top-full left-0 w-[900px] bg-white shadow-lg border border-gray-200 z-50 mt-2 grid grid-cols-7 gap-4 category-dropdown"
-                onMouseEnter={() => setHoveredCategory("all")}
+                onMouseEnter={() => setHoveredCategory("Kadın")}
                 onMouseLeave={() => {
                   // Menü alanının dışına çıkınca kapatılacak
                   setTimeout(() => {
@@ -276,12 +335,16 @@ export default function Header() {
                       key={index}
                       className={`w-48 p-4 cursor-pointer transition-colors duration-200 ${
                         hoveredCategory === index ||
-                        (hoveredCategory === "all" && index === 0)
+                        (hoveredCategory === "Kadın" && index === 0)
                           ? "bg-white text-orange-500 font-bold"
                           : "hover:bg-gray-100 hover:text-orange-500"
                       }`}
                       onMouseEnter={() => setHoveredCategory(index)}
                     >
+                      <span className="text-orange-500 text-lg">
+                        {category.icon}
+                      </span>
+
                       <span className="font-medium">{category.title}</span>
                     </div>
                   ))}
@@ -290,7 +353,7 @@ export default function Header() {
                 {categories.map(
                   (category, index) =>
                     (hoveredCategory === index ||
-                      hoveredCategory === "all") && (
+                      hoveredCategory === "Kadın") && (
                       <div
                         key={index}
                         className="col-span-6 grid grid-cols-4 gap-4 ml-20" // Sağ hizalama için margin-left eklendi
@@ -399,6 +462,7 @@ export default function Header() {
           <span>Mobilya</span>
         </nav>
       </div>
+      
     </header>
   );
 }
