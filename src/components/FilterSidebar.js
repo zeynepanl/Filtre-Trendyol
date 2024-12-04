@@ -52,46 +52,87 @@ export default function FilterSidebar({ isMobile = false, onClose }) {
   if (isMobile) {
     return (
       <div className="fixed inset-0 bg-white z-50 overflow-y-auto">
-        {/* Başlık */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-300">
-          <h2 className="text-lg font-bold text-gray-800">FİLTRELE</h2>
+        <div className="flex items-center justify-center relative px-4 py-3 border-b border-gray-300">
+          {/* Çarpı Butonu */}
           <button
             onClick={onClose}
-            className="text-gray-500 text-2xl focus:outline-none"
+            className="absolute left-4 text-gray-500 text-2xl focus:outline-none"
           >
             ✕
           </button>
+
+          {/* Başlık */}
+          <h2 className="text-lg font-bold text-gray-800">FİLTRELE</h2>
         </div>
+
+        {/* Altındaki Boşluk */}
+        <div className="bg-gray-50 h-4"></div>
 
         {/* Seçili Filtreler */}
         <div className="px-4 py-3 border-b border-gray-300">
           <h3 className="text-gray-500 text-sm mb-2 font-semibold">
             Seçili Filtreler
           </h3>
-          <button className="px-3 py-1 text-sm bg-gray-200 rounded-full text-gray-700 font-medium">
+          <button className="px-3 py-1 text-sm bg-gray-100 rounded-full text-gray-700 font-medium">
             Mobilya
           </button>
         </div>
 
+        <div className="bg-gray-50 h-4"></div>
+
         {/* Filtre seçenekleri */}
         <div className="divide-y divide-gray-300">
-          <button className="w-full flex justify-between items-center px-4 py-3 text-gray-700 font-medium hover:bg-gray-100 border-b border-gray-300">
+          <button className="w-full flex justify-between items-center px-4 py-4 text-gray-700 font-medium hover:bg-gray-100 border border-gray-300">
             <span>Avantajlı Ürünler</span>
-            <ChevronRightIcon className="w-5 h-5 text-orange-500" />
+            <ChevronRightIcon className="w-8 h-8 text-orange-500" />
           </button>
-          <button className="w-full flex justify-between items-center px-4 py-3 text-gray-700 font-medium hover:bg-gray-100 border-b border-gray-300">
+          <button className="w-full flex justify-between items-center px-4 py-4 text-gray-700 font-medium hover:bg-gray-100 border-b border-gray-300">
             <span>Kategori</span>
-            <span className="text-orange-500 font-bold ml-1 ">(1)</span>
-            <ChevronRightIcon className="w-5 h-5 text-orange-500" />
+            <span className="text-orange-500 font-bold mr-72">(1)</span>
+            <ChevronRightIcon className="w-8 h-8 text-orange-500" />
           </button>
-          <button className="w-full flex justify-between items-center px-4 py-3 text-gray-700 font-medium hover:bg-gray-100 border-b border-gray-300">
+          <button className="w-full flex justify-between items-center px-4 py-4 text-gray-700 font-medium hover:bg-gray-100 border-b border-gray-300">
             <span>Marka</span>
-            <ChevronRightIcon className="w-5 h-5 text-orange-500" />
+            <ChevronRightIcon className="w-8 h-8 text-orange-500" />
           </button>
-          <button className="w-full flex justify-between items-center px-4 py-3 text-gray-700 font-medium hover:bg-gray-100 border-b border-gray-300">
+          <button className="w-full flex justify-between items-center px-4 py-4 text-gray-700 font-medium hover:bg-gray-100 border-b border-gray-300">
             <span>Genişlik</span>
-            <ChevronRightIcon className="w-5 h-5 text-orange-500" />
+            <ChevronRightIcon className="w-8 h-8 text-orange-500" />
           </button>
+          <button className="w-full flex justify-between items-center px-4 py-4 text-gray-700 font-medium hover:bg-gray-100 border-b border-gray-300">
+            <span>Derinlik</span>
+            <ChevronRightIcon className="w-8 h-8 text-orange-500" />
+          </button>
+          <button className="w-full flex justify-between items-center px-4 py-4 text-gray-700 font-medium hover:bg-gray-100 border-b border-gray-300">
+            <span>Fiyat</span>
+            <ChevronRightIcon className="w-8 h-8 text-orange-500" />
+          </button>
+          <button className="w-full flex justify-between items-center px-4 py-4 text-gray-700 font-medium hover:bg-gray-100 border-b border-gray-300">
+            <span>Renk</span>
+            <ChevronRightIcon className="w-8 h-8 text-orange-500" />
+          </button>
+        </div>
+
+        {/* Anahtar/Switch Butonları */}
+        <div className="divide-y divide-gray-300">
+          <div className="flex justify-between items-center px-4 py-4 border-t border-gray-300">
+            <span className="text-gray-700 text-sm font-medium">
+              Hızlı Teslimat
+            </span>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" className="sr-only peer" />
+              <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-orange-500 peer-checked:bg-orange-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+            </label>
+          </div>
+          <div className="flex justify-between items-center px-4 py-4  ">
+            <span className="text-gray-700 text-sm font-medium">
+              Fenomenlerin Seçtikleri
+            </span>
+            <label className="relative inline-flex items-center cursor-pointer ">
+              <input type="checkbox" className="sr-only peer" />
+              <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-orange-500 peer-checked:bg-orange-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+            </label>
+          </div>
         </div>
 
         {/* Alt kısımdaki buton */}
