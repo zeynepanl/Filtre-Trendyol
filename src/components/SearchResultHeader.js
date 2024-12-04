@@ -1,12 +1,26 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronLeftIcon, ChevronUpDownIcon, FunnelIcon } from "@heroicons/react/20/solid";
+import {
+  ChevronLeftIcon,
+  ChevronUpDownIcon,
+  FunnelIcon,
+} from "@heroicons/react/20/solid";
 import FilterSidebar from "./FilterSidebar"; // Filtre Modalı için
 import FilterContent from "./FilterTabs"; // Filtre İçeriği için
 
 const SearchResultHeader = () => {
   const [showFilterModal, setShowFilterModal] = useState(false); // Modal kontrolü
+
+  const [showOptions, setShowOptions] = useState(false); // Önerilen açılır kutusu kontrolü
+  const options = [
+    "En düşük fiyat",
+    "En yüksek fiyat",
+    "En çok satan",
+    "En favoriler",
+    "En yeniler",
+    "En çok değerlendirilen",
+  ];
 
   return (
     <div className="p-3 bg-white border-b border-gray-300">
@@ -55,12 +69,38 @@ const SearchResultHeader = () => {
             için <span className="text-black font-medium">100.000+</span> sonuç
             listeleniyor
           </div>
-          <button className="flex items-center justify-between space-x-2 px-6 py-3 border border-gray-300 rounded-lg hover:border-orange-500 transition mr-36">
-            <span className="text-gray-800 text-sm font-medium pr-32">
-              Önerilen
-            </span>
-            <ChevronUpDownIcon className="w-5 h-5 text-orange-500" />
-          </button>
+          {/* Önerilen Butonu ve Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setShowOptions((prev) => !prev)} // Dropdown açılıp kapanma kontrolü
+              className="flex items-center justify-between space-x-2 px-6 py-3 border border-gray-300 rounded-lg hover:border-orange-500 transition mr-36"
+            >
+              <span className="text-gray-800 text-sm font-medium pr-32">
+                Önerilen
+              </span>
+              <ChevronUpDownIcon className="w-5 h-5 text-orange-500" />
+            </button>
+
+            {/* Dropdown Menü */}
+            {showOptions && (
+              <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
+                <ul className="py-2 text-sm text-gray-700">
+                  {options.map((option, index) => (
+                    <li
+                      key={index}
+                      onClick={() => {
+                        console.log(option); // Seçilen seçenek için işlem yapılır
+                        setShowOptions(false); // Dropdown kapatılır
+                      }}
+                      className="px-4 py-2 hover:bg-gray-100 hover:text-orange-500 hover:text-base cursor-pointer transition duration-200"
+                    >
+                      {option}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Filtre Etiketleri */}
