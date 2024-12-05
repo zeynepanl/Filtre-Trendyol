@@ -53,7 +53,7 @@ export default function FilterSidebar({ isMobile = false, onClose }) {
     return (
       <div className="fixed inset-0 bg-white z-50 overflow-y-auto">
         <div className="flex items-center justify-center relative px-4 py-3 border-b border-gray-300">
-          {/* Çarpı Butonu */}
+
           <button
             onClick={onClose}
             className="absolute left-4 text-gray-500 text-2xl focus:outline-none"
@@ -65,7 +65,6 @@ export default function FilterSidebar({ isMobile = false, onClose }) {
           <h2 className="text-lg font-bold text-gray-800">FİLTRELE</h2>
         </div>
 
-        {/* Altındaki Boşluk */}
         <div className="bg-gray-50 h-4"></div>
 
         {/* Seçili Filtreler */}
@@ -179,7 +178,7 @@ export default function FilterSidebar({ isMobile = false, onClose }) {
             </button>
           )}
         </AccordionItem>
-        {/* Diğer accordionlar */}
+
         <AccordionItem title="Marka">
           <div>
             {/* Arama Çubuğu */}
@@ -218,7 +217,6 @@ export default function FilterSidebar({ isMobile = false, onClose }) {
           </div>
         </AccordionItem>
 
-        {/* Diğer Alanlar */}
         <AccordionItem title="Avantajlı Ürünler">
           <ul className="space-y-1 max-h-48 text xs">
             {[
@@ -294,14 +292,14 @@ export default function FilterSidebar({ isMobile = false, onClose }) {
 
         <AccordionItem title="Genişlik">
           <div>
-            {/* Arama Çubuğu */}
+           
             <input
               type="text"
               placeholder="Genişlik ara"
               className="w-full py-2 px-3 border border-gray-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-orange-500 mb-4"
             />
 
-            {/* Marka Listesi */}
+           
             <ul className="space-y-1 max-h-48 text xs">
               {[
                 "100 cm",
@@ -332,7 +330,7 @@ export default function FilterSidebar({ isMobile = false, onClose }) {
         <AccordionItem title="Renk">
           <div className="space-y-4">
             <ul className="grid grid-cols-3 gap-2 text-xs">
-              {/* Color Options */}
+              
               {[
                 { color: "bg-pink-500", label: "Pembe" },
                 { color: "bg-gray-500", label: "Gri" },
